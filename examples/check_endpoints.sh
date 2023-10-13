@@ -2,4 +2,4 @@
 
 set -e
 
-.././request-checker https://google.com https://amazon.co.uk 
+url-checker https://google.com https://amazon.co.uk
