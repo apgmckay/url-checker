@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+var failFlag bool = false
+
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: url_checker <url1> <url2> <url3> ...")
@@ -26,6 +28,7 @@ func main() {
 
 		if err != nil {
 			logger.Printf("Error checking %s: %s\n", url, err)
+			failFlag = true
 			continue
 		}
 		defer resp.Body.Close()
@@ -35,5 +38,9 @@ func main() {
 		} else {
 			logger.Printf("%s is not up (Status Code: %d)\n", url, resp.StatusCode)
 		}
+	}
+
+	if failFlag {
+		os.Exit(1)
 	}
 }
